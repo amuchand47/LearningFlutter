@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning/bloc/internet_bloc/internet_bloc.dart';
-import 'package:learning/bloc/internet_bloc/internet_event.dart';
-import 'package:learning/bloc/internet_bloc/internet_state.dart';
+import 'package:learning/cubit/internet_cubit/internet_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -12,11 +10,11 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white70,
        body: SafeArea(
          child: Center(
-           child: BlocConsumer<InternetBloc, InternetState>(
+           child: BlocConsumer<InternetCubit, InternetState>(
                builder: (context, state){
-                  if(state is InternetInitialState){
+                  if(state == InternetState.Initial){
                     return const Text("Loading...");
-                  }else if(state is InternetLostState){
+                  }else if(state == InternetState.Lost){
                     return const Text("Not Connected");
                   }else{
                     return const Text("Connected");
@@ -25,11 +23,11 @@ class HomeScreen extends StatelessWidget {
 
                listener: (context, state){
 
-                 if(state is InternetLostState){
+                 if(state == InternetState.Lost){
                    ScaffoldMessenger.of(context).showSnackBar(
                      const SnackBar(content: Text("Internet Disconnected",style: TextStyle(color: Colors.black),), backgroundColor: Colors.red,)
                    );
-                 }else if(state is InternetGainedState) {
+                 }else if(state == InternetState.Gained) {
                    ScaffoldMessenger.of(context).showSnackBar(
                        const SnackBar(content: Text("Internet Connected"), backgroundColor: Colors.green,)
                    );
