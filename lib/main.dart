@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning/cubit/internet_cubit/internet_cubit.dart';
-import 'home_screen.dart';
+import 'screens/welcome_screen.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,14 +7,14 @@ void main(){
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context)=>InternetCubit(),
-      child: MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
-      ),
-    );
+        home: WelcomeScreen(),
+      );
   }
+
 }
+
